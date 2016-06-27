@@ -1,0 +1,12 @@
+# sensitive files
+token.py
+testbench.py
+
+# python generated files
+/__pycache__/*
+
+# log files
+*.log
+
+# backup files
+*.bak
