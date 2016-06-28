@@ -2,7 +2,9 @@ import asyncio
 import discord
 import logging
 
+# custom classes
 import diceParser
+import tokenFubar
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -70,4 +72,4 @@ async def on_message(message):
 	elif message.content.startswith('/roll'):
 		await client.send_message(message.channel, diceParser.parseDiceString(message.content))
 
-client.run(token.token)
+client.run(tokenFubar.token)
