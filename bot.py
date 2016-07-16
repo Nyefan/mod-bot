@@ -3,7 +3,6 @@ import discord
 import logging
 
 # custom classes
-import diceParser
 import commandParser
 import tokenFubar
 

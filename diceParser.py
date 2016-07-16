@@ -1,5 +1,10 @@
+import asyncio
+import discord
 import re
 import random
+
+#custom classes
+import globalValues
 
 validDiceString = re.compile(r'''
 								(
@@ -74,3 +79,9 @@ def parseDiceString(diceString):
 		total+=parseDice(str)
 	
 	return total
+
+#parse dice rolls
+async def main(message, client):
+	await client.send_message(message.channel, parseDiceString(message.content))
+
+function = main
