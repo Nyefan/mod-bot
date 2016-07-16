@@ -1,7 +1,6 @@
 import asyncio
 import discord
 
-#TODO: make a parent class for the commands
 #custom classes
 import botHelp
 import diceParser
@@ -12,6 +11,7 @@ import printMe
 import sleep
 import test
 
+#TODO: make a parent class for the commands
 switchDict = { "/delete": deleteMessage.function,
 			   "/deleteme": deleteMe.function,
 			   "/help": botHelp.function,
