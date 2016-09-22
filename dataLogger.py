@@ -2,14 +2,16 @@ import asyncio
 import datetime
 import discord
 import sched
+import threading
 import time
 
 serverID = "143463728317202434"
 
 localScheduler = sched.scheduler(time.time, time.sleep)
 
-def fixedIntervalScheduler(server, scheduler, interval, action, actionargs):
-    scheduler.enter(interval, 1, fixedIntervalScheduler, (server, scheduler, interval, action, actionargs))
+def fixedIntervalScheduler(server, interval, action, actionargs):
+    threading.Timer(interval, fixedIntervalScheduler, (server, interval, action, actionargs)).start()
+    #scheduler.enter(interval, 1, fixedIntervalScheduler, (server, scheduler, interval, action, actionargs))
     action(server, actionargs)
     
 def isAdmin(member):
@@ -65,5 +67,4 @@ def run(client, timeDelay, optionString):
     for s in client.servers:
         if s.id == serverID:
             localServer = s
-    fixedIntervalScheduler(localServer, localScheduler, timeDelay, printStamp, optionString)
-    localScheduler.run()
+    fixedIntervalScheduler(localServer, timeDelay, printStamp, optionString)

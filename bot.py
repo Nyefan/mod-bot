@@ -4,6 +4,7 @@ import logging
 
 # custom classes
 import commandParser
+import dataLogger
 import tokenFubar
 
 logger = logging.getLogger('discord')
@@ -22,10 +23,10 @@ async def on_ready():
     #TODO: print server names
     #print(client.servers)
     print('------')
+    dataLogger.run(client, 300, "dateTimeStamp membersOnline adminsOnline membersActive")
     	
 @client.event
 async def on_message(message):
 	await commandParser.parse(message, client)
-
 
 client.run(tokenFubar.token)
