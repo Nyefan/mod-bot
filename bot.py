@@ -1,17 +1,20 @@
+# This version runs both user interraction and logging capabilities
+# To disable logging, comment out datastatusLogger.run() in on_ready
+
 import asyncio
 import discord
 import logging
 
 # custom classes
 import commandParser
-import dataLogger
+import datastatusLogger
 import tokenFubar
 
-logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
+statusLogger = logging.getstatusLogger('discord')
+statusLogger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='bot.log', encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
+statusLogger.addHandler(handler)
 
 client = discord.Client()
 
@@ -20,7 +23,6 @@ async def on_ready():
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
-    #TODO: print server names
     #print(client.servers)
     print('------')
     dataLogger.run(client, 300, "dateTimeStamp membersOnline adminsOnline membersActive")

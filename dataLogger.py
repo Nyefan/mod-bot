@@ -1,17 +1,21 @@
 import asyncio
 import datetime
 import discord
+import io
+import os
 import sched
 import threading
 import time
 
-serverID = "143463728317202434"
+import tokenFubar
+
+serverID = tokenFubar.serverID
+outputFile = "dataLogger"
 
 localScheduler = sched.scheduler(time.time, time.sleep)
 
 def fixedIntervalScheduler(server, interval, action, actionargs):
     threading.Timer(interval, fixedIntervalScheduler, (server, interval, action, actionargs)).start()
-    #scheduler.enter(interval, 1, fixedIntervalScheduler, (server, scheduler, interval, action, actionargs))
     action(server, actionargs)
     
 def isAdmin(member):
@@ -55,14 +59,15 @@ optionDict = { "adminsOnline"  : adminsOnline,
 
 def printStamp(server, optionString):
     options = optionString.split()
-    printString = "{{serverID: {}, ".format(server)
-    printString = "{{serverID: {}, ".format(server)
+    printString = "{{serverID: {}".format(server)
     for i in options:
-        printString = printString + "{}: {}, ".format(i, optionDict[i](server))
-    printString = printString + "}"
-    print(printString)
+        printString = "{}, {}: {}".format(printString, i, optionDict[i](server))
+    printString = printString + "}\n"
     
-def run(client, timeDelay, optionString):
+    with open(server.name + " - " + outputFile + ".log", "a") as file:
+        file.write(printString)
+    
+def run(client, timeDelay, optionString=""):
     localServer = None
     for s in client.servers:
         if s.id == serverID:
