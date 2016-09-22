@@ -4,7 +4,10 @@ import discord
 #custom classes
 import globalValues
 
-helpMessage = "."
+help_message = "```Syntax: /delete [number]\n Usage: deletes the previous [number] messages, including the command.```"
+
+async def helpFunction(message, client):
+    await client.send_message(message.channel, help_message)
 
 #delete last x messages
 #TODO: raise permissionExceededException for _permission_message
