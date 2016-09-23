@@ -25,6 +25,7 @@ async def on_ready():
     #print(client.servers)
     print('------')
     dataLogger.run(client, 300, "dateTimeStamp membersOnline adminsOnline membersActive")
-    memberLogger.run(client, 60*60*24, "memberName memberNick")
+    memberLogger.printMemberList(client, "memberName memberNick")
+    memberLogger.run(client, 30, "memberStatus memberGame")
 
 client.run(tokenFubar.token)
