@@ -103,7 +103,7 @@ optionDict = { "dateTimeStamp" : dateTimeStamp,
 
 
 
-#TODO: refactor these out into separate functions
+#TODO: refactor these out into a single function
 #TODO: require dateTimeStamp, memberID, and roleID to be passed in like any other query             
 def printMemberList(client, optionString):
     localServer = None
